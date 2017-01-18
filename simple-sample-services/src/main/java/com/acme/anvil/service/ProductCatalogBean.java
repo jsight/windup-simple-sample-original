@@ -1,21 +1,20 @@
 package com.acme.anvil.service;
 
 import java.rmi.RemoteException;
+import java.util.logging.Logger;
 
 import javax.ejb.EJBException;
 import javax.ejb.SessionBean;
 import javax.ejb.SessionContext;
 
-import weblogic.i18n.logging.NonCatalogLogger;
-
 public class ProductCatalogBean implements SessionBean {
 
-	private static final NonCatalogLogger LOG = new NonCatalogLogger("ProductCatalogBean");
+	private static final Logger LOG = Logger.getLogger("ProductCatalogBean");
 	
 	private SessionContext sessionContext;
 	
 	public void setSessionContext(SessionContext ctx) throws EJBException, RemoteException {
-		this.sessionContext = sessionContext;
+		this.sessionContext = ctx;
 	}
 
 	public void ejbRemove() throws EJBException, RemoteException {

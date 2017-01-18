@@ -2,6 +2,7 @@ package com.acme.anvil;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.logging.Logger;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -14,24 +15,23 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.time.DateUtils;
 
-import weblogic.i18n.logging.NonCatalogLogger;
 import weblogic.servlet.security.ServletAuthentication;
 
 public class AuthenticateFilter implements Filter {
 
-	private NonCatalogLogger ncl = new NonCatalogLogger("AuthenticateFilter");
+	private static final Logger LOG = Logger.getLogger("AuthenticateFilter");
 	
 	public void destroy() {
-		ncl.debug("AuthenticateFilter destroy.");
+		LOG.fine("AuthenticateFilter destroy.");
 	}
 
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
 	    HttpServletRequest request = (HttpServletRequest)req;
 	    HttpSession session = request.getSession();
 	    
-		ncl.debug("AuthenticateFilter doFilter.");
+		LOG.fine("AuthenticateFilter doFilter.");
 		if(req.getAttribute("cancelSession") != null) {
-			ncl.info("Cancelled session due to session timeout.");
+			LOG.info("Cancelled session due to session timeout.");
 			ServletAuthentication.invalidateAll(request);
 		}
 		else if(session != null) {
@@ -49,7 +49,7 @@ public class AuthenticateFilter implements Filter {
 	}
 
 	public void init(FilterConfig config) throws ServletException {
-		ncl.debug("AuthenticateFilter init.");
+		LOG.fine("AuthenticateFilter init.");
 	}
 
 }

@@ -2,6 +2,7 @@ package com.acme.anvil;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.logging.Logger;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -15,16 +16,15 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.time.DateUtils;
 
-import weblogic.i18n.logging.NonCatalogLogger;
 import weblogic.servlet.security.ServletAuthentication;
 
 public class LoginFilter implements Filter {
 
-	private NonCatalogLogger ncl = new NonCatalogLogger("LoginFilter");
+	private Logger ncl = Logger.getLogger("LoginFilter");
 	
 
 	public void destroy() {
-		ncl.debug("LoginFilter destroy.");
+		ncl.fine("LoginFilter destroy.");
 	}
 
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
@@ -36,6 +36,6 @@ public class LoginFilter implements Filter {
 	}
 
 	public void init(FilterConfig config) throws ServletException {
-		ncl.debug("LoginFilter init.");
+		ncl.fine("LoginFilter init.");
 	}
 }
