@@ -2,6 +2,8 @@ package com.acme.anvil.service.jms;
 
 import java.util.Properties;
 
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.jms.JMSException;
 import javax.jms.ObjectMessage;
 import javax.jms.Queue;
@@ -14,27 +16,32 @@ import javax.jms.TopicSession;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.transaction.InvalidTransactionException;
+import javax.transaction.SystemException;
+import javax.transaction.Transaction;
+import javax.transaction.TransactionManager;
 
 import org.apache.log4j.Logger;
 
-import weblogic.transaction.ClientTransactionManager;
-import weblogic.transaction.Transaction;
-import weblogic.transaction.TransactionHelper;
-
 import com.acme.anvil.vo.LogEvent;
 
+@Stateless
 public class LogEventPublisher {
 
 	private static final Logger LOG = Logger.getLogger(LogEventPublisher.class);
 	private static final String QUEUE_JNDI_NAME = "jms/LogEventQueue";
 	private static final String QUEUE_FACTORY_JNDI_NAME = "jms/LogEventQueue";
 
-	public static void publishLogEvent(LogEvent log) {
+	@Inject
+	private TransactionManager transactionManager;
+	
+	public void publishLogEvent(LogEvent log) throws SystemException, InvalidTransactionException {
 		//get a reference to the transaction manager to suspend the current transaction incase of exception.
-		ClientTransactionManager ctm = TransactionHelper.getTransactionHelper().getTransactionManager();
+		//ClientTransactionManager ctm = TransactionHelper.getTransactionHelper().getTransactionManager();
 		Transaction saveTx = null;
 		try {
-			saveTx = (Transaction) ctm.forceSuspend(); // Forced
+			//saveTx = (Transaction) ctm.forceSuspend(); // Forced
+			saveTx = transactionManager.suspend();
 
 			try {
 				Context ic = getContext();
@@ -51,7 +58,7 @@ public class LogEventPublisher {
 			}
 
 		} finally {
-			ctm.forceResume(saveTx);
+			transactionManager.resume(saveTx);
 		}
 	}
 
