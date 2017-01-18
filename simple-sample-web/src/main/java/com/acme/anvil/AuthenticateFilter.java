@@ -15,8 +15,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.time.DateUtils;
 
-import weblogic.servlet.security.ServletAuthentication;
-
 public class AuthenticateFilter implements Filter {
 
 	private static final Logger LOG = Logger.getLogger("AuthenticateFilter");
@@ -32,7 +30,8 @@ public class AuthenticateFilter implements Filter {
 		LOG.fine("AuthenticateFilter doFilter.");
 		if(req.getAttribute("cancelSession") != null) {
 			LOG.info("Cancelled session due to session timeout.");
-			ServletAuthentication.invalidateAll(request);
+			request.logout();
+			//ServletAuthentication.invalidateAll(request);
 		}
 		else if(session != null) {
 			Date fiveMinutesAgo = DateUtils.addMinutes(new Date(), -5);
@@ -42,7 +41,8 @@ public class AuthenticateFilter implements Filter {
 			if(timeLastAccessed.before(fiveMinutesAgo)) {
 				session.invalidate();
 				//make the user log back in.
-				ServletAuthentication.invalidateAll(request);
+				request.logout();
+				//ServletAuthentication.invalidateAll(request);
 			}
 		}
 		

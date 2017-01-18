@@ -16,8 +16,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.time.DateUtils;
 
-import weblogic.servlet.security.ServletAuthentication;
-
 public class LoginFilter implements Filter {
 
 	private Logger ncl = Logger.getLogger("LoginFilter");
