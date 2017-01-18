@@ -6,8 +6,6 @@ import javax.ejb.SessionBean;
 
 import org.apache.log4j.Logger;
 
-import weblogic.ejb.GenericSessionBean;
-
 import com.acme.anvil.service.jms.LogEventPublisher;
 import com.acme.anvil.vo.Item;
 import com.acme.anvil.vo.LogEvent;

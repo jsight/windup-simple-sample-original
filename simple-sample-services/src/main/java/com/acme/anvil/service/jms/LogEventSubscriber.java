@@ -3,7 +3,10 @@ package com.acme.anvil.service.jms;
 
 import java.text.SimpleDateFormat;
 
+import javax.ejb.MessageDriven;
 import javax.ejb.MessageDrivenBean;
+import javax.jms.JMSConnectionFactoryDefinition;
+import javax.jms.JMSDestinationDefinition;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
@@ -13,17 +16,16 @@ import org.apache.log4j.Logger;
 
 import com.acme.anvil.vo.LogEvent;
 
-import weblogic.ejb.GenericMessageDrivenBean;
-import weblogic.ejbgen.MessageDriven;
-
+@JMSDestinationDefinition(
+	    name = "java:jboss/jms/queue/LogEventQueue",
+	    destinationName="LogEventQueue", 
+	    description="Log Event Queue", 
+	    interfaceName = "javax.jms.Queue")
+@JMSConnectionFactoryDefinition(name = "java:/AnotherConnectionFactory") 
 @MessageDriven(
-   ejbName = "LogEventSubscriber",
-   destinationJndiName = "jms/LogEventQueue",
-   destinationType = "javax.jms.Topic",
-   runAsPrincipalName = "anvil_user",
-   runAs = "anvil_user"
+   name = "LogEventSubscriber"
 )
-public class LogEventSubscriber extends GenericMessageDrivenBean implements MessageDrivenBean, MessageListener {
+public class LogEventSubscriber implements MessageListener {
 
 	private static final Logger LOG = Logger.getLogger(LogEventSubscriber.class);
 	private static final SimpleDateFormat SDF = new SimpleDateFormat("MM/dd/yyyy 'at' HH:mm:ss z");
