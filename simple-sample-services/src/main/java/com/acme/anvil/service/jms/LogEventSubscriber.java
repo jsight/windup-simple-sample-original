@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 
 import javax.ejb.MessageDriven;
 import javax.ejb.MessageDrivenBean;
+import javax.ejb.ActivationConfigProperty;
 import javax.jms.JMSConnectionFactoryDefinition;
 import javax.jms.JMSDestinationDefinition;
 import javax.jms.JMSException;
@@ -20,10 +21,12 @@ import com.acme.anvil.vo.LogEvent;
 	    name = "java:jboss/jms/queue/LogEventQueue",
 	    destinationName="LogEventQueue", 
 	    description="Log Event Queue", 
-	    interfaceName = "javax.jms.Queue")
-@JMSConnectionFactoryDefinition(name = "java:/AnotherConnectionFactory") 
+	    interfaceName = "javax.jms.Queue") 
 @MessageDriven(
-   name = "LogEventSubscriber"
+	activationConfig = {
+	    @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
+	    @ActivationConfigProperty(propertyName = "destination", propertyValue = "LogEventQueue"),
+	}
 )
 public class LogEventSubscriber implements MessageListener {
 

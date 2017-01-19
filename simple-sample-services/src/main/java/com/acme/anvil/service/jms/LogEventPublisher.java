@@ -1,9 +1,7 @@
 package com.acme.anvil.service.jms;
 
-import java.util.Properties;
-
+import javax.annotation.Resource;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.jms.JMSException;
 import javax.jms.ObjectMessage;
 import javax.jms.Queue;
@@ -11,8 +9,6 @@ import javax.jms.QueueConnection;
 import javax.jms.QueueConnectionFactory;
 import javax.jms.QueueSender;
 import javax.jms.QueueSession;
-import javax.jms.TopicPublisher;
-import javax.jms.TopicSession;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -32,7 +28,7 @@ public class LogEventPublisher {
 	private static final String QUEUE_JNDI_NAME = "jms/LogEventQueue";
 	private static final String QUEUE_FACTORY_JNDI_NAME = "jms/LogEventQueue";
 
-	@Inject
+	@Resource
 	private TransactionManager transactionManager;
 	
 	public void publishLogEvent(LogEvent log) throws SystemException, InvalidTransactionException {
