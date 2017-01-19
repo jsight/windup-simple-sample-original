@@ -15,8 +15,6 @@ import com.acme.anvil.service.jms.LogEventPublisher;
 import com.acme.anvil.vo.Item;
 import com.acme.anvil.vo.LogEvent;
 
-@Stateless
-@TransactionTimeout(value = 180, unit = TimeUnit.SECONDS)
 public class ItemLookupBean {
 
 	private static final Logger LOG = Logger.getLogger(ItemLookup.class);

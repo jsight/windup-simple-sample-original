@@ -1,4 +1,3 @@
-/home/jsight/ide/jbds/windup-workspace/simple-sample/simple-sample-services/src/main/java/com/acme/anvil/listener/AnvilWebStartupListener.java
 /home/jsight/ide/jbds/windup-workspace/simple-sample/simple-sample-services/src/main/java/com/acme/anvil/vo/Item.java
 /home/jsight/ide/jbds/windup-workspace/simple-sample/simple-sample-services/src/main/java/com/acme/anvil/service/ItemLookupLocal.java
 /home/jsight/ide/jbds/windup-workspace/simple-sample/simple-sample-services/src/main/java/com/acme/anvil/service/jms/LogEventPublisher.java

@@ -8,5 +8,5 @@
 		<role-name>WebRunAsRole</role-name>
 		<run-as-principal-name>Admin</run-as-principal-name>
 	</run-as-role-assignment>
-	<context-root>jee-example-web</context-root>
+	<context-root>simple-sample-web</context-root>
 </weblogic-web-app>

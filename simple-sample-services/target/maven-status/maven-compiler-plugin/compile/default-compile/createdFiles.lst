@@ -1,0 +1,17 @@
+com/acme/anvil/service/ProductCatalog.class
+com/acme/anvil/listener/AnvilWebLifecycleListener.class
+com/acme/anvil/service/ItemLookupHome.class
+com/acme/anvil/service/ItemLookup.class
+com/acme/anvil/vo/LogEvent.class
+com/acme/anvil/service/ItemLookupLocal.class
+com/acme/anvil/service/ProductCatalogLocalHome.class
+com/acme/anvil/service/jms/LogEventPublisher.class
+com/acme/anvil/vo/Item.class
+com/acme/anvil/management/AnvilInvokeBean.class
+com/acme/anvil/service/ProductCatalogLocal.class
+com/acme/anvil/service/ProductCatalogBean.class
+com/acme/anvil/service/jms/LogEventSubscriber.class
+com/acme/anvil/service/ProductCatalogHome.class
+com/acme/anvil/service/ItemLookupBean.class
+com/acme/anvil/service/ItemLookupLocalHome.class
+com/acme/anvil/management/AnvilInvokeBeanImpl.class

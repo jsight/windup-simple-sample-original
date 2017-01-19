@@ -11,13 +11,15 @@
     <description>Example EAR, WAR, EJB JAR that use Weblogic vendor specific APIs.  </description>
 
     <modules>
-		<module>simple-sample-services</module>
-		<module>simple-sample-web</module>
-		<module>simple-sample-app</module>
-	</modules>
+        <module>simple-sample-services</module>
+        <module>simple-sample-web</module>
+        <module>simple-sample-app</module>
+    </modules>
 
     <properties>
         <weblogic.version>10.3</weblogic.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
     <dependencies>
