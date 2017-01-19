@@ -27,9 +27,9 @@ public class AuthenticateFilter implements Filter {
 	    HttpServletRequest request = (HttpServletRequest)req;
 	    HttpSession session = request.getSession();
 	    
-		LOG.fine("AuthenticateFilter doFilter.");
+		LOG.info("AuthenticateFilter doFilter.");
 		if(req.getAttribute("cancelSession") != null) {
-			LOG.info("Cancelled session due to session timeout.");
+			LOG.info("Cancelled session due to cancelSession attribute.");
 			request.logout();
 			//ServletAuthentication.invalidateAll(request);
 		}
@@ -39,17 +39,18 @@ public class AuthenticateFilter implements Filter {
 			Date timeLastAccessed = new Date(session.getLastAccessedTime());
 			
 			if(timeLastAccessed.before(fiveMinutesAgo)) {
+				LOG.info("Cancelled session due to age");
 				session.invalidate();
 				//make the user log back in.
 				request.logout();
 				//ServletAuthentication.invalidateAll(request);
 			}
-		}
-		
+		} 
+		chain.doFilter(req, resp);
 	}
 
 	public void init(FilterConfig config) throws ServletException {
-		LOG.fine("AuthenticateFilter init.");
+		LOG.info("AuthenticateFilter init.");
 	}
 
 }
